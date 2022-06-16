@@ -44,7 +44,7 @@ In order to view the project, navigate to the `price_prediction_app.py` file in 
 ![Image2](https://github.com/MaxAcheson/price_prediction_app/blob/main/Images/Image2.png)
 
 ### Forecasting Components
-![Image3]()
+![Image3](https://github.com/MaxAcheson/price_prediction_app/blob/main/Images/Image3.png)
 
 
 ## Contributors
