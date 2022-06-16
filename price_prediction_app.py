@@ -77,7 +77,8 @@ stocks = ('AAPL',	'GLW',	'FISV',	'CLX',	'MDT',	'LH',	'APH',	'BEN', \
     'IBM',	'ANSS',	'WMB',	'PTC',	'GD',	'EXPE',	'FAST',	'CDAY', \
     'CVS',	'CHD',	'ORLY',	'NDSN',	'SHW',	'BRO',	'ES',	'DXCM', \
     'UA',	'UAA',	'PVH',	'NCLH',	'FDX',	'WDC',	'CMI',	'WYNN', \
-    'ALK',	'ODFL',	'PENN',	'IPGP',	'REGN',	'MOH',	'IDXX',	'VNO')
+    'ALK',	'ODFL',	'PENN',	'IPGP',	'REGN',	'MOH',	'IDXX',	'VNO', \
+    'ETH-USD', 'BTC-USD')
     
 
 # Import Raw Data
@@ -96,8 +97,8 @@ data_load_state =st.text("Loading Data...")
 data = load_stock_data(select_stock)
 data_load_state.text("Loading Data...Done!")
 
-st.subheader("Raw Price Data (Past 5 Days)")
-st.write(data.tail())
+st.subheader("Raw Price Data")
+st.write(data)
 
 def plot_raw_data():
     figure = go.Figure()
@@ -108,3 +109,23 @@ def plot_raw_data():
 
 plot_raw_data()
 
+# Data Training for Forecasting
+df_train = data[['Date', 'Close']]
+df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+
+model = Prophet()
+model.fit(df_train)
+future = model.make_future_dataframe(periods=period)
+
+forecast = model.predict(future)
+
+st.subheader('Forecast Data')
+st.write(forecast)
+
+st.write('Forecast Data')
+figure_1 = plot_plotly(model, forecast)
+st.plotly_chart(figure_1)
+
+st.write("Forecast Components")
+figure_2 = model.plot_components(forecast)
+st.write(figure_2)
