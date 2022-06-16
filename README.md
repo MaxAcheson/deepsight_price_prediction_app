@@ -1,5 +1,7 @@
 # "Deepsight" Stock Prediction Application 
 
+This application allows users to retrieve future price predictions for any S&P 500 stock. Users can click on the dropbox to select a stock, or simply type the stock ticker into the box itself. The app uses vectorized back testing, as well as other simple data-training methods in order to predict future prices. Users can view up to 4 years of future price simulations. 
+
 ## Technologies
 
 This project utilizes python 3.7 along with the following packages:
