@@ -2,7 +2,7 @@
 
 import streamlit as st
 from datetime import date
-import yfinance as wf
+import yfinance as yf
 from fbprophet import Prophet
 from fbprophet.plot import plot_plotly
 from plotly import graph_objs as go
@@ -10,7 +10,9 @@ from plotly import graph_objs as go
 START = "2015-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 
-st.title("Stock Prediciton App")
+st.set_page_config(layout="wide")
+
+st.title("Deepsight Stock Prediction App")
 
 # All present S&P 500 Companies as a list of tuples
 stocks = ('AAPL',	'GLW',	'FISV',	'CLX',	'MDT',	'LH',	'APH',	'BEN', \
@@ -77,8 +79,32 @@ stocks = ('AAPL',	'GLW',	'FISV',	'CLX',	'MDT',	'LH',	'APH',	'BEN', \
     'UA',	'UAA',	'PVH',	'NCLH',	'FDX',	'WDC',	'CMI',	'WYNN', \
     'ALK',	'ODFL',	'PENN',	'IPGP',	'REGN',	'MOH',	'IDXX',	'VNO')
     
-select_stock = st.selectbox("Select stock for prediction", stocks)
 
-timeframe_selector = st.slider("Select a timeframe for prediction", 1 , 4)
+# Import Raw Data
+select_stock = st.selectbox("Select a Stock for Prediction", stocks)
+
+timeframe_selector = st.slider("Select a Timeframe for Prediction (In Years)", 1 , 4)
 period = timeframe_selector * 365
+
+@st.cache
+def load_stock_data(ticker):
+    data = yf.download(ticker, START, TODAY)
+    data.reset_index(inplace=True)
+    return data
+
+data_load_state =st.text("Loading Data...")
+data = load_stock_data(select_stock)
+data_load_state.text("Loading Data...Done!")
+
+st.subheader("Raw Price Data (Past 5 Days)")
+st.write(data.tail())
+
+def plot_raw_data():
+    figure = go.Figure()
+    figure.add_trace(go.Scatter(x=data['Date'], y=data['Open'], name='stock_open'))
+    figure.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name='stock_close'))
+    figure.layout.update(title_text='Time Series Data', width=1200, height=600, xaxis_rangeslider_visible=True)
+    st.plotly_chart(figure)
+
+plot_raw_data()
 
