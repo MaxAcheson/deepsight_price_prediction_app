@@ -95,7 +95,7 @@ def load_stock_data(ticker):
 
 data_load_state =st.text("Loading Data...")
 data = load_stock_data(select_stock)
-data_load_state.text("Loading Data...Done!")
+data_load_state.text("Loading Data...Complete!")
 
 st.subheader("Raw Price Data")
 st.write(data)
