@@ -32,16 +32,16 @@ This project has been constructed in [Visual Studio Code](https://code.visualstu
 
 ## Usage
 
-In order to view the project, navigate to the `price_prediction_app.py` file in the repository directory. If you cannot find the file, simply click [here](https://github.com/MaxAcheson/price_prediction_app/blob/main/price_prediction_app.py) instead. If you would like to interact with the live version of the analysis, you may navigate to your cloned version of the repository in your terminal and run the file using the command `streamlit run price_prediction_app.py`.
+In order to view the project, navigate to the `price_prediction_app.py` file in the repository directory. If you cannot find the file, simply click [here](https://github.com/MaxAcheson/price_prediction_app/blob/main/Code/price_prediction_app.py) instead. If you would like to interact with the live version of the analysis, you may navigate to your cloned version of the repository in your terminal and run the file using the command `streamlit run price_prediction_app.py`.
 
 ## Views of Streamlit User Interface
 
 ### Stock Price Raw Data
-![Image1]()
+![Image1](https://github.com/MaxAcheson/price_prediction_app/blob/main/Images/Image1.png)
 
 
 ### Stock Price Forecasting
-![Image2]()
+![Image2](https://github.com/MaxAcheson/price_prediction_app/blob/main/Images/Image2.png)
 
 ### Forecasting Components
 ![Image3]()
