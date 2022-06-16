@@ -15,7 +15,7 @@ st.set_page_config(layout="wide")
 st.title("Deepsight Stock Prediction App")
 
 # All present S&P 500 Companies as a list of tuples
-stocks = ('AAPL',	'GLW',	'FISV',	'CLX',	'MDT',	'LH',	'APH',	'BEN', \
+stocks = ('AAPL', 'GLW', 'FISV', 'CLX',	'MDT',	'LH',	'APH',	'BEN', \
     'MSFT',	'VICI',	'ATVI',	'GNRC',	'SCHW',	'MLM',	'RSG',	'CBOE', \
     'GOOG',	'OKE',	'OXY',	'CAG',	'LOW',	'DRE',	'TEL',	'HAS', \
     'GOOGL',	'AMP',	'FIS',	'SWKS',	'ANTM',	'NTRS',	'IQV',	'NI', \
@@ -119,12 +119,16 @@ future = model.make_future_dataframe(periods=period)
 
 forecast = model.predict(future)
 
+st.markdown("""---""")
+
 st.subheader('Forecast Data')
 st.write(forecast)
 
-st.write('Forecast Data')
 figure_1 = plot_plotly(model, forecast)
+figure_1.layout.update(title_text='Forecast Plot', width=1200, height=600, xaxis_rangeslider_visible=True)
 st.plotly_chart(figure_1)
+
+st.markdown("""---""")
 
 st.write("Forecast Components")
 figure_2 = model.plot_components(forecast)
